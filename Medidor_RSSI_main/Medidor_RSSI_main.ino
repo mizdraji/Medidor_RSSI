@@ -1,12 +1,8 @@
-//Segunda version envia y recibe paquetes
-//Envia un paquete, se recibe por nodered a travez de mqtt y se lee el RSSI de subida que es reenviado para su lectura en datoEntrante
-//cuando se recibe el paquete se lee el RSSI del paquete recibido con lora.getRssi()
-//Medidor RSSI con heltec lora esp32 
-//Creado por German Mizdraji para Macro Intell S.A
-//2023
-//Version 2.6 heltek
-//cada 3 mensajes enviados si no se recibe respuestas aparecen puntos para saber que no hay un gateway disponible
-
+/* Version 2.7 Medidor RSSI con heltec lora esp32 
+** 2025 **
+** Creado por German Mizdraji
+** Ahora lora se recibe como interrupción.
+*/
 #include <lorawan.h>
 #include <Wire.h>
 #include <Adafruit_GFX.h>
@@ -78,7 +74,7 @@ void setup() {
   lora.setDataRate(SF7BW125);
 
   //Set Channel Default
-   lora.setChannel(CH0);
+  lora.setChannel(CH0);
   //lora.setChannel(MULTI);                               // set channel to random
   
   // Put ABP Key and DevAddress here
@@ -113,7 +109,7 @@ void setup() {
     lora.update();
       }
       recvStatus=0;
-  attachInterrupt(digitalPinToInterrupt(RFM_pins.DIO0), onReceive,  CHANGE);            //habilita interrupciones para mensajes recibidos lora, se utiliza CHANGE para cuando la señal cambia HIGH <-->LOW. Con RISING se generan multiples interrupciones.
+ attachInterrupt(digitalPinToInterrupt(RFM_pins.DIO0), onReceive,  CHANGE);            //habilita interrupciones para mensajes recibidos lora, se utiliza CHANGE para cuando la señal cambia HIGH <-->LOW. Con RISING se generan multiples interrupciones.
 }
 
 void loop() {
@@ -131,7 +127,7 @@ void loop() {
     display.print("Tx: ");display.print(rssi_rcv);              // display.print(" dbm ");
 
     display.setTextSize(2);
-    display.setCursor(0,35);
+    display.setCursor(0,30);
     display.print("Rx: ");display.print(rssiValue);
     display.setCursor(0,50);
     display.print(get_name);
@@ -145,7 +141,7 @@ void loop() {
     send_count = 0;
     Serial.println("...........................................");
     display.setTextSize(2);
-    display.setCursor(0,35);
+    display.setCursor(0,30);
     display.print("Rx: .....");
     display.display();
     display.clearDisplay();
@@ -153,6 +149,7 @@ void loop() {
     }
   }
   
+//  recvStatus = lora.readData(datoEntrante);
   if(recvStatus) {
 
   Serial.print("datoentrante: ");Serial.println(datoEntrante);
@@ -170,7 +167,7 @@ void loop() {
   if (token != NULL) {
     String gatewayname(token);
     get_name = gatewayname;
-    Serial.print("gateway: ");Serial.println(get_name);
+    //Serial.print("gateway: ");Serial.println(get_name);
     
   }
 
@@ -178,11 +175,12 @@ void loop() {
   rcv_count++;
   //Serial.print("rcv_count: ");Serial.println(rcv_count);
   rssiValue = lora.getRssi();     //rssi de paquete recibido (downlink)
+  //Serial.print("lora Get RSSI: "); Serial.println(rssiValue)
   itoa(rssiValue, rssiSend, 10);
   
   Serial.print("RSSI de bajada ====>> ");  Serial.println(rssiValue);
   display.setTextSize(2);
-  display.setCursor(0,35);
+  display.setCursor(0,30);
   display.print("Rx: ");display.print(rssiValue);
   display.setCursor(0,50);
   display.print(get_name);
@@ -192,6 +190,7 @@ void loop() {
   display.print("Tx: ");display.print(rssi_rcv);
   display.display();
   display.clearDisplay();
+  memset(datoEntrante, 0, sizeof(datoEntrante)); // Borra cualquier contenido anterior
   //recvStatus = 0;
   }
 
@@ -201,8 +200,8 @@ void loop() {
 
 
 // Función de interrupción para mensajes recibidos lora
-void IRAM_ATTR onReceive() {
-  recvStatus = lora.readData(datoEntrante); // Cambia bandera cuando hay un paquete recibido
-}
+ void IRAM_ATTR onReceive() {
+   recvStatus = lora.readData(datoEntrante); // Cambia bandera cuando hay un paquete recibido
+ }
 
   

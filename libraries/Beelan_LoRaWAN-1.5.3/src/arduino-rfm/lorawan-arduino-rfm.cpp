@@ -266,7 +266,7 @@ void LoRaWANClass::setTxPower(int level,txPin_t pinTx)
 int LoRaWANClass::getRssi()
 {
     // return rssi value in dBm - convertion according to sx1276 datasheet
-    return -157 + RFM_Get_Rssi();
+    return -137 + RFM_Get_Rssi();
 }
 
 void LoRaWANClass::setDeviceClass(devclass_t dev_class)
@@ -438,7 +438,7 @@ void LoRaWANClass::update(void)
         #endif
         //Get data
         LORA_Receive_Data(&Buffer_Rx, &Session_Data, &OTAA_Data, &Message_Rx, &LoRa_Settings);
-        Serial.println(Buffer_Rx.Data[0],HEX);
+        //Serial.println(Buffer_Rx.Data[0],HEX);
 
         if ((Message_Rx.Frame_Control & 0x20) > 0){
             Ack_Status = NEW_ACK;
@@ -447,22 +447,22 @@ void LoRaWANClass::update(void)
             #endif   
         }
 
-        if ((Buffer_Rx.Data[0] & 0x31) == 0x31){ //if received a confirmed Downlink. Send ACK
+        /*if ((Buffer_Rx.Data[0] & 0x31) == 0x31){ //if received a confirmed Downlink. Send ACK
             //Enviar ACK
-            //LORA_Send_ACK(&Buffer_ACK, &Session_Data, &LoRa_Settings);
+            LORA_Send_ACK(&Buffer_ACK, &Session_Data, &LoRa_Settings);
             Serial.println("ACK 0x31");
-        }
-        if ((Buffer_Rx.Data[0] & 0x80) == 0x80){ //if received a confirmed Downlink. Send ACK
+        }*/
+        /*if ((Buffer_Rx.Data[0] & 0x80) == 0x80){ //if received a confirmed Downlink. Send ACK
             //Enviar ACK
             LORA_Send_ACK(&Buffer_ACK, &Session_Data, &LoRa_Settings);
             Serial.println("ACK 0x80");
-        }
+        }*/
         if ((Buffer_Rx.Data[0] & 0xA0) == 0xA0){ //if received a confirmed Downlink. Send ACK
             //Enviar ACK
             LORA_Send_ACK(&Buffer_ACK, &Session_Data, &LoRa_Settings);
             Serial.println("ACK 0xA0");
         }
-        if ((Buffer_Rx.Data[0] & 0x60) == 0x60){ //if received a confirmed Downlink. Send ACK
+        /*if ((Buffer_Rx.Data[0] & 0x60) == 0x60){ //if received a confirmed Downlink. Send ACK
             //Enviar ACK
             LORA_Send_ACK(&Buffer_ACK, &Session_Data, &LoRa_Settings);
             Serial.println("ACK 0x60");
@@ -471,7 +471,7 @@ void LoRaWANClass::update(void)
             //Enviar ACK
             LORA_Send_ACK(&Buffer_ACK, &Session_Data, &LoRa_Settings);
             Serial.println("ACK 0x40");
-        }
+        }*/
         if(Buffer_Rx.Counter != 0x00)
         {
             #ifdef DEBUG3
