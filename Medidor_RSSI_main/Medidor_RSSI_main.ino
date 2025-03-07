@@ -16,18 +16,20 @@ int rcv_count = 0;                // contador de mensajes recibidos
 int send_count = 0;               // contador de mensajes enviados
 int diferencia = 3;               //diferencia para comparar send_count y rcv_count
 
+int rssi = 0;
 int rssi_rcv = 0;
-int rssiValue=0;
-char rssiSend[20]={0};                     //variable para guardar dato a enviar en forma de string
+int rssiValue = 0;
+char rssiSend[20] = {0};                     //variable para guardar dato a enviar en forma de string
 String get_name;                           //variable para guardar gatewayname
 
-char datoEntrante[255]={0};                //variable para guardar dato recibido
-char *token;                 
+char datoEntrante[255] = {0};                //variable para guardar dato recibido
+char gatewayname[50];                
 
 byte recvStatus = 0;
 char uncero[1]={0};
 
 void IRAM_ATTR onReceive();
+void ProcesardatoEntrante();
 
 void setup() {
   //setup OLED
@@ -154,22 +156,7 @@ void loop() {
 
   Serial.print("datoentrante: ");Serial.println(datoEntrante);
 
-  //procesa una cadena (datoEntrante) separada por comas (,) y extrae dos valores. strtok() se usa para dividir (tokenizar) una cadena usando una coma (,) como separador.
-  // Obtener el primer token (rssi)
-   token = strtok(datoEntrante, ",");               //Extrae el primer valor de datoEntrante antes de la primera coma y lo almacena en token
-   if (token != NULL) {                             //Si token no es NULL (es decir, si datoEntrante contenía algo antes de la primera coma), convierte ese valor a un número entero con atoi().
-    int rssi = atoi(token);
-    rssi_rcv = rssi; 
-   }
- 
-  // Obtener el segundo token (gatewayname)
-  token = strtok(NULL, ",");                        //Se llama a strtok(NULL, ",") para obtener el siguiente valor después de la primera coma. NULL indica que se debe continuar desde donde se quedó el strtok() anterior.
-  if (token != NULL) {                              //Si el segundo token no es NULL, lo convierte en un objeto String.
-    String gatewayname(token);
-    get_name = gatewayname;
-    //Serial.print("gateway: ");Serial.println(get_name);
-    
-  }
+  ProcesardatoEntrante();
 
 
   rcv_count++;
@@ -203,5 +190,13 @@ void loop() {
  void IRAM_ATTR onReceive() {
    recvStatus = lora.readData(datoEntrante); // Cambia bandera cuando hay un paquete recibido
  }
+
+//Función para procesar datoEntrante
+void ProcesardatoEntrante(){
+  if (sscanf(datoEntrante, "%d,%49s", &rssi, gatewayname) == 2) {           //sscanf() extrae valores sin modificar la cadena original.
+    rssi_rcv = rssi;
+    get_name = String(gatewayname);
+  }
+}
 
   
