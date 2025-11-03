@@ -10,10 +10,12 @@ int rssiValue=0;
 char rssiSend[20]={0};                     //variable para guardar dato a enviar en forma de string
 String get_name;                           //variable para guardar gatewayname
 
-char datoEntrante[255]={0};                //variable para guardar dato recibido
+#define INPUTBUFF 100
+char datoEntrante[INPUTBUFF]={0};                //variable para guardar dato recibido
 char *token;                 
 
-int recvStatus = 0;
+byte recvStatus = 0;
+bool packetReceived = false;
 
 
 void IRAM_ATTR onReceive();
