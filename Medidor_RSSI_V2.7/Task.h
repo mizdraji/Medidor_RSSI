@@ -6,16 +6,16 @@ Scheduler PDR;  // Tareas relacionadas a la prueba de red PDR
 
 void config_task();
 void decrementarEspera();
-void intentarEnvio();
-void tareaEsperarAck();
-void tareaFinalizar();
 void intentarEnvioPDR();
+void EsperarAck();
+void tareaFinalizar();
+
 int32_t random_time(unsigned int MIN_, unsigned int MAX_);
 
 // Tareas de PDR
-Task tDecrementarEspera(1000, TASK_FOREVER, &decrementarEspera, &PDR, true, NULL, &intentarEnvio);
-Task tIntentarEnvio(TASK_IMMEDIATE, TASK_ONCE, &intentarEnvio, &PDR, false);
-Task tEsperarAck(500, TASK_FOREVER, &tareaEsperarAck, &PDR, false);
+Task tDecrementarEspera(1000, TASK_FOREVER, &decrementarEspera, &PDR, true, NULL, &intentarEnvioPDR);
+//Task tIntentarEnvio(TASK_IMMEDIATE, TASK_ONCE, &intentarEnvio, &PDR, false);
+Task tEsperarAck(500, TASK_FOREVER, &EsperarAck, &PDR, false);
 
 /*Task(unsigned long aInterval,           1. aInterval is in milliseconds (or microseconds) (default = 0)
               long aIterations,           2. aIteration in number of times, -1 for indefinite execution (default = -1)

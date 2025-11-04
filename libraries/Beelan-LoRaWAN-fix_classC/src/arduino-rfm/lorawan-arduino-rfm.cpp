@@ -432,7 +432,7 @@ bool LoRaWANClass::readAck(void)
     if (Ack_Status == NEW_ACK)
     {
         Ack_Status = NO_ACK;
-        Serial.println("ACK received!");
+        //Serial.println("ACK received!");
         return true;
     }
     return false;

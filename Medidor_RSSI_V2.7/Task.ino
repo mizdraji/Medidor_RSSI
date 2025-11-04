@@ -4,7 +4,6 @@ void config_task() {
   PDR.addTask(tIntentarEnvio);
   PDR.addTask(tDecrementarEspera);
   PDR.addTask(tEsperarAck);
-  PDR.addTask(tFinalizar);
 }
 
 // ==================== FUNCIONES DE PDR ==================== //
@@ -19,14 +18,16 @@ void decrementarEspera() {
   }
 }
 
-void intentarEnvio() {
+void intentarEnvioPDR() {
   if (!nodo.pdr_ok && nodo.t_wait == 0) {
     nodo.t_wait = random(MIN_RANDOM, MAX_RANDOM);
-    intentarEnvioPDR();
+    char uncero[1] = { 0 };
+    lora.sendUplink(uncero, strlen(uncero), 1, 1);
+    tEsperarAck.enable();
   }
 }
 
-void tareaEsperarAck() {
+void EsperarAck() {
   static uint8_t cont_timeout = 0;
   if (lora.readAck()) {
     Serial.println("--> ACK recibido");
@@ -44,13 +45,6 @@ void tareaEsperarAck() {
     }
   }
 }
-
-void intentarEnvioPDR() {
-  char uncero[1] = { 0 };
-  lora.sendUplink(uncero, strlen(uncero), 1, 1);
-  tEsperarAck.enable();
-}
-
 
 int32_t random_time(unsigned int MIN_,unsigned int MAX_) {
   //calcula un nuevo tiempo
