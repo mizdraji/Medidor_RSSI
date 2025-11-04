@@ -483,7 +483,7 @@ void LoRaWANClass::update(void)
         {
             //Get data
             LORA_Receive_Data(&Buffer_Rx, &Session_Data, &OTAA_Data, &Message_Rx, &LoRa_Settings);
-            Serial.print("Buffer_Rx.Data[0]: 0x"); Serial.println(Buffer_Rx.Data[0],HEX);
+            //Serial.print("Buffer_Rx.Data[0]: 0x"); Serial.println(Buffer_Rx.Data[0],HEX);
 
             if ((Message_Rx.Frame_Control & 0x20) > 0){     // ack get only in RX2 window
                 Ack_Status = NEW_ACK;
@@ -491,7 +491,7 @@ void LoRaWANClass::update(void)
 
             if (Buffer_Rx.Counter != 0x00)
             {
-                Serial.println("update - Rx_Status = NEW_RX");
+                //Serial.println("update - Rx_Status = NEW_RX");
                 Rx_Status = NEW_RX;
                 // MType 3:unconfirmed dwn / 5:confirmed dwn
                 bool isConfirmed =  ((Message_Rx.MAC_Header & 0xE0)>>5) == 5 ? true : false ; 

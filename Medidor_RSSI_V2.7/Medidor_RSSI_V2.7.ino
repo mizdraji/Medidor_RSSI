@@ -62,6 +62,8 @@ void IRAM_ATTR onReceive()
     //recvStatus = lora.readData(datoEntrante);
    packetReceived = true;
   }
+  detachInterrupt(digitalPinToInterrupt(RFM_pins.DIO0));
+  Serial.println("interrupt");
 }
 
   

@@ -65,7 +65,7 @@ void tareaFinalizar() {
 void procesarExitoPDR() {
   nodo.pdr_ok = true;
   nodo.t_wait = random_time(0, MAX_RANDOM_LARGO);
-  nodo.pausa_larga = 0;
+  nodo.pausa_larga = false;
   nodo.cont_pausas_largas = 0;
   nodo.cont_reintento_corto = 0;
 
@@ -78,7 +78,7 @@ void procesarFalloPDR() {
 
   if (nodo.cont_reintento_corto >= MAX_REINTENTOS) {
     nodo.cont_reintento_corto = 0;
-    nodo.pausa_larga = 1;
+    nodo.pausa_larga = true;
     nodo.cont_pausas_largas++;
 
     if (nodo.cont_pausas_largas >= MAX_PAUSAS_LARGAS) {
