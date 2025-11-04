@@ -37,11 +37,6 @@ void loop()
     PDR.execute(); // Es necesario ejecutar el runner en cada loop
     lora.update();
 
-  //Serial.print("recvStatus: "); Serial.println(recvStatus);
-  //recvStatus = lora.readData(datoEntrante);
-  // if(lora.readData(datoEntrante) > 1) {
-  //   Serial.print("Datoentrante: "); Serial.println(datoEntrante);
-  // }
   recvStatus = 0;
 
      if(packetReceived && lora.readData(datoEntrante) > 1)   // Check Lora RX
@@ -59,11 +54,10 @@ void loop()
 void IRAM_ATTR onReceive() 
 {
   if(!packetReceived){
-    //recvStatus = lora.readData(datoEntrante);
    packetReceived = true;
   }
-  detachInterrupt(digitalPinToInterrupt(RFM_pins.DIO0));
-  Serial.println("interrupt");
+  //detachInterrupt(digitalPinToInterrupt(RFM_pins.DIO0));
+  //Serial.println("interrupt");
 }
 
   

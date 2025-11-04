@@ -1,4 +1,4 @@
-#define VERSION "Medidor RSSI V2.6 Heltek"       //Version
+#define VERSION "Medidor RSSI V2.7.2 Heltek"       //Version
 #define SERIAL_SPEED 115200         //Serial
 
 //ABP Credentials 
