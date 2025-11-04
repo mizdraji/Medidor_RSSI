@@ -1,7 +1,7 @@
 void config_task() {
   Serial.println("Initialized scheduler");
 
-  PDR.addTask(tIntentarEnvio);
+  //PDR.addTask(tIntentarEnvio);
   PDR.addTask(tDecrementarEspera);
   PDR.addTask(tEsperarAck);
 }
