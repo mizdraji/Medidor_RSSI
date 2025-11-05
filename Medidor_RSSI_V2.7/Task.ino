@@ -45,8 +45,3 @@ void EsperarAck() {
     }
   }
 }
-
-int32_t random_time(unsigned int MIN_,unsigned int MAX_) {
-  //calcula un nuevo tiempo
-  return random(MIN_, MAX_);
-}

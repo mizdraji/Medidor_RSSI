@@ -1,4 +1,3 @@
-
 //Función Setup OLED
 void config_OLED()
 {
@@ -34,3 +33,20 @@ void init_OLED()
   delay(1000);
   display.clearDisplay();
 }
+
+// void mostrarDisplay(){
+//     Serial.print("Tx: ");Serial.println(rssi_rcv);
+//     display.setCursor(0,0);
+//     display.setTextSize(2);
+//     display.print("Tx: ");display.print(rssi_rcv);              // display.print(" dbm ");
+
+//     display.setTextSize(2);
+//     display.setCursor(0,35);
+//     display.print("Rx: ");display.print(rssiValue);
+//     display.setCursor(0,50);
+//     display.print(get_name);
+    
+//     display.display();
+//     display.clearDisplay();
+
+// }

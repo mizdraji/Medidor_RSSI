@@ -10,8 +10,6 @@ void intentarEnvioPDR();
 void EsperarAck();
 void tareaFinalizar();
 
-int32_t random_time(unsigned int MIN_, unsigned int MAX_);
-
 // Tareas de PDR
 Task tDecrementarEspera(1000, TASK_FOREVER, &decrementarEspera, &PDR, true, NULL, &intentarEnvioPDR);
 //Task tIntentarEnvio(TASK_IMMEDIATE, TASK_ONCE, &intentarEnvio, &PDR, false);

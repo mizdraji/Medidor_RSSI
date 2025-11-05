@@ -496,7 +496,7 @@ void LoRaWANClass::update(void)
                 // MType 3:unconfirmed dwn / 5:confirmed dwn
                 bool isConfirmed =  ((Message_Rx.MAC_Header & 0xE0)>>5) == 5 ? true : false ; 
                 if(isConfirmed) {
-                    Serial.print("isconfirmed: "); Serial.println(isConfirmed);
+                    //Serial.print("isconfirmed: "); Serial.println(isConfirmed);
                     Ack_Status = NEW_ACK;
                     Message_Rx.Frame_Control = 0;           // clear ack bit after reading
                 }

@@ -44,20 +44,15 @@ void loop()
         packetReceived = false;
         //lora.readData(datoEntrante);
         Serial.print("Datoentrante: "); Serial.println(datoEntrante);
+        ProcesarDatoEntrante(datoEntrante, &rssi_rcv, &get_name);  // pasamos direcciones
+        Serial.print("rssi_rcv: "); Serial.println(rssi_rcv);
+        Serial.print("get_name: "); Serial.println(get_name);
         memset(datoEntrante, 0, INPUTBUFF);
      }
      
 }
 
 
-// Función de interrupción para mensajes recibidos lora
-void IRAM_ATTR onReceive() 
-{
-  if(!packetReceived){
-   packetReceived = true;
-  }
-  //detachInterrupt(digitalPinToInterrupt(RFM_pins.DIO0));
-  //Serial.println("interrupt");
-}
+
 
   
