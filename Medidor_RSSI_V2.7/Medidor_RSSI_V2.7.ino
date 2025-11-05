@@ -47,6 +47,7 @@ void loop()
         ProcesarDatoEntrante(datoEntrante, &rssi_rcv, &get_name);  // pasamos direcciones
         Serial.print("rssi_rcv: "); Serial.println(rssi_rcv);
         Serial.print("get_name: "); Serial.println(get_name);
+        mostrarDisplay(rssi_rcv, rssiValue, &get_name);
         memset(datoEntrante, 0, INPUTBUFF);
      }
      

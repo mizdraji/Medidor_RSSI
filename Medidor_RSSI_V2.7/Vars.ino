@@ -1,5 +1,5 @@
 //FUNCIONES AUXILIARES
-void ProcesarDatoEntrante(char *inputData, int8_t *rssi_out, String *name_out){
+void ProcesarDatoEntrante(char *inputData, int16_t *rssi_out, String *name_out){
   char *token;
   
   // Obtener el primer token (rssi)
