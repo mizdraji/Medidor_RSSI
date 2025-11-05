@@ -44,10 +44,11 @@ void loop()
         packetReceived = false;
         //lora.readData(datoEntrante);
         Serial.print("Datoentrante: "); Serial.println(datoEntrante);
-        ProcesarDatoEntrante(datoEntrante, &rssi_rcv, &get_name);  // pasamos direcciones
+        ProcesarDatoEntrante(datoEntrante, &rssi_rcv, &rssiValue, &get_name);  // pasamos direcciones
         Serial.print("rssi_rcv: "); Serial.println(rssi_rcv);
+        Serial.print("rssiValue: "); Serial.println(rssiValue);
         Serial.print("get_name: "); Serial.println(get_name);
-        mostrarDisplay(rssi_rcv, rssiValue, &get_name);
+        //mostrarDisplay(rssi_rcv, rssiValue, rssiRX, &get_name);
         memset(datoEntrante, 0, INPUTBUFF);
      }
      

@@ -42,7 +42,8 @@ void mostrarDisplay(int16_t rssiTX, int16_t rssiRX, String *gatewayname){
 
     display.setTextSize(2);
     display.setCursor(0,35);
-    rssiRX = lora.getRssi();
+    //rssiRX = lora.getRssi();
+    Serial.print("Rx: ");Serial.println(rssiRX);
     display.print("Rx: ");display.print(rssiRX);
     display.setCursor(0,50);
     display.print(*gatewayname);

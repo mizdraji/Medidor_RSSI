@@ -51,4 +51,4 @@ struct str {
 };  str nodo;
 
 void IRAM_ATTR onReceive();
-void ProcesarDatoEntrante(char *inputData, int16_t *rssi_out, String *name_out);
+void ProcesarDatoEntrante(char *inputData, int16_t *rssi_out, int16_t *rssiRX, String *name_out);
