@@ -43,14 +43,14 @@ void loop()
      {
         packetReceived = false;
         //lora.readData(datoEntrante);
-        Serial.print("Datoentrante: "); Serial.println(datoEntrante);
+        DEBUG_PRINT("Datoentrante: "); DEBUG_PRINTLN(datoEntrante);
         ProcesarDatoEntrante(datoEntrante, &rssi_rcv, &rssiValue, &get_name);  
         //Se ingresa el datoEntrante y se obtiene: rssi_rcv (rssi recibido en el gw, es el TX del nodo).
         //rssiValue: es el valor rssi leido en el nodo cuando llega un paquete.
         //get_name: es el nombre del gateway.
-        Serial.print("rssi_rcv: "); Serial.println(rssi_rcv);
-        Serial.print("rssiValue: "); Serial.println(rssiValue);
-        Serial.print("get_name: "); Serial.println(get_name);
+        DEBUG_PRINT("rssi_rcv: "); DEBUG_PRINTLN(rssi_rcv);
+        DEBUG_PRINT("rssiValue: "); DEBUG_PRINTLN(rssiValue);
+        DEBUG_PRINT("get_name: "); DEBUG_PRINTLN(get_name);
         mostrarDisplay(rssi_rcv, rssiValue, &get_name);
      }
      

@@ -1,5 +1,14 @@
-#define VERSION "Medidor RSSI V2.7.2 Heltek"       //Version
+#define VERSION "Medidor RSSI V2.7.3 Heltek"       //Version
 #define SERIAL_SPEED 115200         //Serial
+
+#define DEBUG 0   // cambiar a 0 para desactivar
+#if DEBUG
+  #define DEBUG_PRINT(x)   Serial.print(x)
+  #define DEBUG_PRINTLN(x) Serial.println(x)
+#else
+  #define DEBUG_PRINT(x)
+  #define DEBUG_PRINTLN(x)
+#endif
 
 //ABP Credentials 
 const char *devAddr = "01fa9919";       //"ef491cef": 24337; "01fa9919": nodo Medidor rssi

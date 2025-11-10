@@ -3,7 +3,7 @@ void config_lora()
 {
   Serial.println("Start..");
   if(!lora.init()){
-    Serial.println("RFM95 not detected");
+    DEBUG_PRINTLN("RFM95 not detected");
     delay(5000);
     return;
   }
@@ -13,8 +13,8 @@ void config_lora()
   lora.setNwkSKey(nwkSKey);
   lora.setAppSKey(appSKey);
   lora.setDevAddr(devAddr);
-  Serial.print("Device name: "); Serial.println(DeviceNM);
-  Serial.print("nwkSKey: "); Serial.println(nwkSKey);
-  Serial.print("appSKey: "); Serial.println(appSKey);
-  Serial.print("devAddr: "); Serial.println(devAddr);
+  DEBUG_PRINT("Device name: "); DEBUG_PRINTLN(DeviceNM);
+  DEBUG_PRINT("nwkSKey: "); DEBUG_PRINTLN(nwkSKey);
+  DEBUG_PRINT("appSKey: "); DEBUG_PRINTLN(appSKey);
+  DEBUG_PRINT("devAddr: "); DEBUG_PRINTLN(devAddr);
 }

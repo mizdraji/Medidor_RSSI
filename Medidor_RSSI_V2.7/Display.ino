@@ -9,7 +9,7 @@ void config_OLED()
   //initialize OLED
   Wire.begin(OLED_SDA, OLED_SCL);
   if(!display.begin(SSD1306_SWITCHCAPVCC, OLED_ADDR, false, false)) {       // Address 0x3C for 128x32
-     Serial.println(F("SSD1306 allocation failed"));
+     DEBUG_PRINTLN(F("SSD1306 allocation failed"));
     for(;;); // Don't proceed, loop forever
   }
 
@@ -35,7 +35,7 @@ void init_OLED()
 }
 
 void mostrarDisplay(int16_t rssiTX, int16_t rssiRX, String *gatewayname){
-    Serial.print("Tx: ");Serial.println(rssiTX);               
+    DEBUG_PRINT("Tx: ");DEBUG_PRINTLN(rssiTX);               
     display.setCursor(0,0);
     display.setTextSize(2);
     display.print("Tx: ");display.print(rssiTX);              // display.print(" dbm ");
@@ -43,17 +43,17 @@ void mostrarDisplay(int16_t rssiTX, int16_t rssiRX, String *gatewayname){
     display.setTextSize(2);
     display.setCursor(0,35);
     
-    Serial.print("Rx: ");Serial.println(rssiRX);
+    DEBUG_PRINT("Rx: ");DEBUG_PRINTLN(rssiRX);
     display.print("Rx: ");display.print(rssiRX);
     display.setCursor(0,50);
     display.print(*gatewayname);
-    Serial.print("gatewayname: ");Serial.println(*gatewayname);
+    DEBUG_PRINT("gatewayname: ");DEBUG_PRINTLN(*gatewayname);
     display.display();
     display.clearDisplay();
 }
 
 void ProcesarFalla(){
-  Serial.println("...........................................");
+  DEBUG_PRINT("...........................................");
   display.setTextSize(2);
   display.setCursor(0,35);
   display.print("Rx: .....");
