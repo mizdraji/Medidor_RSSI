@@ -5,7 +5,7 @@ void ProcesarDatoEntrante(char *inputData, int16_t *rssi_out, int16_t *rssiRX, S
   //rssiRX: es el valor rssi leido en el nodo cuando llega un paquete.
   //name_out: es el nombre del gateway.
   //formato del datoEntrante: rssi, gatewayname, ej: { -115, EE15 }
-
+  //static uint8_t rcv_count = 0;
   char *token;
   
   // Obtener el primer token (rssi)
@@ -19,36 +19,14 @@ void ProcesarDatoEntrante(char *inputData, int16_t *rssi_out, int16_t *rssiRX, S
   token = strtok(NULL, ",");
   if (token != NULL) {
     *name_out = String(token);    //nombre gateway, salida por puntero
+    rcv_count++;    //solo aumento cuando el datorecibido posee una coma
   }
   *rssiRX = lora.getRssi();
 
-   memset(inputData, 0, strlen(inputData));           //Se limpia el buffer del datoEntrante.
+  
+
+  memset(inputData, 0, strlen(inputData));           //Se limpia el buffer del datoEntrante.
 }
-
-//necesito enviar cada cierto invervalo un valor de rssi
-// void PaqueteSalida(){
-//   rssiValue = lora.getRssi();       //rssi de paquete recibido (downlink)
-//   itoa(rssiValue, rssiSend, 10);    //Esta función se utiliza para convertir un valor numérico(rssiValue) en una cadena de texto(rssiSend).
-
-//   lora.sendUplink(rssiSend, strlen(rssiSend), 0, 1);
-//   send_count++;
-//   if(abs(send_count - rcv_count) > diferencia){
-//   rcv_count = 0;
-//   send_count = 0;
-//   Serial.println("...........................................");
-//   display.setTextSize(2);
-//   display.setCursor(0,35);
-//   display.print("Rx: .....");
-//   display.display();
-//   display.clearDisplay();
-// }
-
-
-
-
-
-
-
 
 // Función de interrupción para mensajes recibidos lora
 void IRAM_ATTR onReceive() 
@@ -59,13 +37,4 @@ void IRAM_ATTR onReceive()
   //detachInterrupt(digitalPinToInterrupt(RFM_pins.DIO0));
   //Serial.println("interrupt");
 }
-
-//tarea que envia cada cierto tiempo el valor rssi
-    // 
-    // 
-    // //Serial.print("send count: ");Serial.println(send_count);
-    
-
-
-    // //Serial.print("diferencia: ");Serial.println((send_count - rcv_count));
     

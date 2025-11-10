@@ -51,3 +51,12 @@ void mostrarDisplay(int16_t rssiTX, int16_t rssiRX, String *gatewayname){
     display.display();
     display.clearDisplay();
 }
+
+void ProcesarFalla(){
+  Serial.println("...........................................");
+  display.setTextSize(2);
+  display.setCursor(0,35);
+  display.print("Rx: .....");
+  display.display();
+  display.clearDisplay();
+}

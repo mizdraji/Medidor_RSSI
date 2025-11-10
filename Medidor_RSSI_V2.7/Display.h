@@ -11,3 +11,4 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RST);
 void config_OLED();       //Setup OLED
 void init_OLED();         //inicialización OLED
 void mostrarDisplay(int16_t rssiTX, int16_t rssiRX, String *gatewayname);     //funcion para visualizar en display valores de rssiTX, rssiRX y gatewayname
+void ProcesarFalla();

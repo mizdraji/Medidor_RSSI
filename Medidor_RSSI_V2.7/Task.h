@@ -9,11 +9,14 @@ void decrementarEspera();
 void intentarEnvioPDR();
 void EsperarAck();
 void tareaFinalizar();
+void PaqueteSalida();
 
 // Tareas de PDR
 Task tDecrementarEspera(1000, TASK_FOREVER, &decrementarEspera, &PDR, true, NULL, &intentarEnvioPDR);
-//Task tIntentarEnvio(TASK_IMMEDIATE, TASK_ONCE, &intentarEnvio, &PDR, false);
+
 Task tEsperarAck(500, TASK_FOREVER, &EsperarAck, &PDR, false);
+
+Task tEnvio(10000, TASK_FOREVER, &PaqueteSalida, &PDR, false);          //envia el paquete de salida cada 10 segundos
 
 /*Task(unsigned long aInterval,           1. aInterval is in milliseconds (or microseconds) (default = 0)
               long aIterations,           2. aIteration in number of times, -1 for indefinite execution (default = -1)
