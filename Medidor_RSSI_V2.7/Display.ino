@@ -35,19 +35,19 @@ void init_OLED()
 }
 
 void mostrarDisplay(int16_t rssiTX, int16_t rssiRX, String *gatewayname){
-    Serial.print("Tx: ");Serial.println(rssiTX);
+    Serial.print("Tx: ");Serial.println(rssiTX);               
     display.setCursor(0,0);
     display.setTextSize(2);
     display.print("Tx: ");display.print(rssiTX);              // display.print(" dbm ");
 
     display.setTextSize(2);
     display.setCursor(0,35);
-    //rssiRX = lora.getRssi();
+    
     Serial.print("Rx: ");Serial.println(rssiRX);
     display.print("Rx: ");display.print(rssiRX);
     display.setCursor(0,50);
     display.print(*gatewayname);
-    
+    Serial.print("gatewayname: ");Serial.println(*gatewayname);
     display.display();
     display.clearDisplay();
 }

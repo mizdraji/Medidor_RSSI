@@ -1,13 +1,13 @@
 const unsigned long interval = 15000;      // 15 s interval to send message
 unsigned long previousMillis = 0;          // will store last time message sent
 unsigned int counter = 0;                  // message counter
-int rcv_count  = 0;                         // contador de mensajes recibidos
+int rcv_count  = 0;                        // contador de mensajes recibidos
 int send_count = 0;                        // contador de mensajes enviados
 int diferencia = 3;                        //diferencia para comparar send_count y rcv_count
 
-int16_t rssi_rcv  = 0;
-int16_t rssiValue = 0;
-char rssiSend[20] = {0};                     //variable para guardar dato a enviar en forma de string
+int16_t rssi_rcv  = 0;                     //variable para guardar valor rssi recibido en el gateway, seria el TX del nodo.
+int16_t rssiValue = 0;                     //variable para guardar el valor RX del nodo, cuando se recibe un paquete se lee el rssi con el que llega.
+char rssiSend[20] = {0};                   //variable para guardar dato a enviar en forma de string
 String get_name;                           //variable para guardar gatewayname
 
 #define INPUTBUFF 100

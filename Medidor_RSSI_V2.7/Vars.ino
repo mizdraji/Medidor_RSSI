@@ -4,6 +4,7 @@ void ProcesarDatoEntrante(char *inputData, int16_t *rssi_out, int16_t *rssiRX, S
   //rssi_out: rssi recibido (es el valor que llego al gateway, seria el TX del nodo).
   //rssiRX: es el valor rssi leido en el nodo cuando llega un paquete.
   //name_out: es el nombre del gateway.
+  //formato del datoEntrante: rssi, gatewayname, ej: { -115, EE15 }
 
   char *token;
   
@@ -20,6 +21,8 @@ void ProcesarDatoEntrante(char *inputData, int16_t *rssi_out, int16_t *rssiRX, S
     *name_out = String(token);    //nombre gateway, salida por puntero
   }
   *rssiRX = lora.getRssi();
+
+   memset(inputData, 0, strlen(inputData));           //Se limpia el buffer del datoEntrante.
 }
 
 //necesito enviar cada cierto invervalo un valor de rssi

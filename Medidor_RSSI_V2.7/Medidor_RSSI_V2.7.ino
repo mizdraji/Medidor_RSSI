@@ -39,17 +39,19 @@ void loop()
 
   recvStatus = 0;
 
-     if(packetReceived && lora.readData(datoEntrante) > 1)   // Check Lora RX
+     if(packetReceived && lora.readData(datoEntrante) > 1)   // Nuevo mensaje recibido.
      {
         packetReceived = false;
         //lora.readData(datoEntrante);
         Serial.print("Datoentrante: "); Serial.println(datoEntrante);
-        ProcesarDatoEntrante(datoEntrante, &rssi_rcv, &rssiValue, &get_name);  // pasamos direcciones
+        ProcesarDatoEntrante(datoEntrante, &rssi_rcv, &rssiValue, &get_name);  
+        //Se ingresa el datoEntrante y se obtiene: rssi_rcv (rssi recibido en el gw, es el TX del nodo).
+        //rssiValue: es el valor rssi leido en el nodo cuando llega un paquete.
+        //get_name: es el nombre del gateway.
         Serial.print("rssi_rcv: "); Serial.println(rssi_rcv);
         Serial.print("rssiValue: "); Serial.println(rssiValue);
         Serial.print("get_name: "); Serial.println(get_name);
-        //mostrarDisplay(rssi_rcv, rssiValue, rssiRX, &get_name);
-        memset(datoEntrante, 0, INPUTBUFF);
+        mostrarDisplay(rssi_rcv, rssiValue, &get_name);
      }
      
 }
